@@ -12,6 +12,7 @@ const body = html`
     <section>
       <button id="theme-switcher">switch theme</button>
     </section>
+    <aside class="train" data-rotate="rotate(120deg)"><div class="stack"></div><div class="stack"></div><div class="stack"></div><div class="stack"></div></aside>
   </body>
 </html>
 `
