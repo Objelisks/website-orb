@@ -1,0 +1,41 @@
+:root {
+  --background: #514e39;
+  --foreground: #95ac71;
+  --highlight: #b7b399;
+  --lowlight: #948e69;
+  --attention: #c88e55;
+}
+
+.theme-nature {
+  --background: #514e39;
+  --foreground: #95ac71;
+  --highlight: #b7b399;
+  --lowlight: #948e69;
+  --attention: #c88e55;
+}
+
+.theme-blessing {
+  --background: #74569b;
+  --foreground: #96fbc7;
+  --highlight: #ffb3cb;
+  --lowlight: #d8bfd8;
+  --attention: #f7ffae;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--highlight);
+}
+
+h1 {
+  font-family: sans-serif;
+  text-transform: full-width;
+  text-decoration: overline;
+  font-weight: 900;
+}
+
+section {
+  background-color: var(--foreground);
+  padding: 1rem;
+  max-width: 10rem;
+}
