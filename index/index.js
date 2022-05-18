@@ -7,6 +7,11 @@ const themes = [
   'theme-woodblock'
 ]
 let activeTheme = 0
+const mouse = {x: 0, y: 0}
+let x = 200
+let y = 200
+let rotate = 0
+const lerp = (from, to, t) => from + (to-from) * t
 
 ready(() => {
   on('#theme-switcher', 'click', () => {
@@ -16,17 +21,24 @@ ready(() => {
     classes.add(themes[activeTheme])
   })
 
-  let x = 200
-  let y = 200
-  let rotate = 0
-  setInterval(() => {
+  document.addEventListener('mousemove', (event) => {
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
+  })
+
+  const moveTrain = () => {
     document.querySelectorAll('.train').forEach((train) => {
-      train.style.setProperty('--rotate', `${rotate}deg`)
+      train.style.setProperty('--rotate', `${rotate}rad`)
       train.style.setProperty('--pos-x', `${x}px`)
       train.style.setProperty('--pos-y', `${y}px`)
-      rotate += 1
-      x += Math.cos(rotate*Math.PI/180)
-      y += Math.sin(rotate*Math.PI/180)
+      let dir = Math.atan2(mouse.y-y, mouse.x-x)-rotate
+      if(dir < -Math.PI) dir += 2*Math.PI
+      if(dir > Math.PI) dir -= 2*Math.PI
+      rotate = (rotate + dir*0.1) % (2*Math.PI)
+      x += Math.cos(rotate)
+      y += Math.sin(rotate)
     })
-  }, 10)
+    requestAnimationFrame(moveTrain)
+  }
+  requestAnimationFrame(moveTrain)
 })
