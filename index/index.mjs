@@ -4,8 +4,8 @@ const body = html`
 <!doctype html>
 <html>
   <head>
-    <link href="./common/styles.css" type="text/css" rel="stylesheet">
-    <script src="./index/index.js" type="module"></script>
+    <link href="/common/styles.css" type="text/css" rel="stylesheet">
+    <script src="./index.js" type="module"></script>
   </head>
   <body>
     <h1>welcome to objelisks space</h1>
@@ -17,7 +17,7 @@ const body = html`
 </html>
 `
 
-const index = (ctx, next) => {
+const index = async (ctx, next) => {
   ctx.response.body = body.toString()
 }
 
