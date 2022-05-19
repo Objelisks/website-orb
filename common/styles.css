@@ -5,6 +5,7 @@
   --highlight: #b7b399;
   --lowlight: #948e69;
   --attention: #c88e55;
+  --article-width: 45rem;
 }
 
 .theme-nature {
@@ -37,7 +38,9 @@
 body {
   background-color: var(--background);
   color: var(--highlight);
-  overflow: hidden;
+  overflow-x: hidden;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: 500;
 }
 
 h1 {
@@ -45,6 +48,42 @@ h1 {
   text-transform: full-width;
   text-decoration: overline;
   font-weight: 900;
+}
+
+a {
+  color: var(--foreground);
+}
+
+a:visited {
+  color: var(--lowlight);
+}
+
+a:hover {
+  color: var(--foreground);
+}
+
+article {
+  padding: 1rem;
+  line-height: 1.3;
+  font-size: larger;
+  max-width: var(--article-width);
+}
+
+article img {
+  display: block;
+  margin: 1rem;
+  max-width: var(--article-width);
+}
+
+article pre {
+  background-color: var(--lowlight);
+  color: var(--background);
+  padding: 1rem;
+  overflow-x: scroll;
+}
+
+article br {
+  margin-bottom: 0.5rem;
 }
 
 section {
