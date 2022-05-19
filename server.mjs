@@ -1,8 +1,8 @@
 import Koa from 'koa'
-import index from './index/index.mjs'
 import serve from 'koa-static'
 import Router from '@koa/router'
 import mount from 'koa-mount'
+import index from './index/index.mjs'
 
 const app = new Koa()
 const router = new Router()
