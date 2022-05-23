@@ -1,32 +1,13 @@
 const ready = (callback) => document.addEventListener('DOMContentLoaded', callback)
 const on = (selector, eventName, callback) => document.querySelector(selector).addEventListener(eventName, callback)
 
-const themes = [
-  'theme-nature',
-  'theme-blessing',
-  'theme-woodblock'
-]
 const mouse = {x: 0, y: 0}
 let x = 200
 let y = 200
 let rotate = 0
 let trainOn = false
 
-let activeTheme = sessionStorage.getItem('theme') || 0
-const updateTheme = (targetTheme) => {
-  const classes = document.querySelector('body').classList
-  classes.remove(themes[activeTheme])
-  activeTheme = targetTheme
-  classes.add(themes[activeTheme])
-  sessionStorage.setItem('theme', activeTheme)
-}
-updateTheme(activeTheme)
-
 ready(() => {
-  on('#theme-switcher', 'click', () => {
-    updateTheme((activeTheme + 1) % themes.length)
-  })
-
   on('#frog', 'click', () => {
     trainOn = !trainOn
     document.querySelectorAll('.train').forEach(train => {
@@ -35,8 +16,8 @@ ready(() => {
   })
 
   document.addEventListener('mousemove', (event) => {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
+    mouse.x = event.pageX;
+    mouse.y = event.pageY;
   })
 
   const moveTrain = () => {

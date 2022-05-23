@@ -21,9 +21,11 @@ const body = (entries) => html`
     <link href="blog/styles.css" type="text/css" rel="stylesheet">
   </head>
   <body>
-    <h1>blog zone</h1>
+    <h1 class="header">blog zone</h1>
     ${nav}
+    <section>
     ${raw(entries.map(renderEntry).join('\n'))}
+    </section>
   </body>
 </html>
 `

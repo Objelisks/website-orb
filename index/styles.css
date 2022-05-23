@@ -19,23 +19,23 @@
 
 .train .stack:nth-child(1) {
   top: -4px;
-  background-color: var(--attention);
+  background-color: var(--shadow);
 }
 
 .train .stack:nth-child(2) {
   top: -8px;
-  background-color: var(--foreground);
+  background-color: var(--text);
 }
 
 .train .stack:nth-child(3) {
   top: -12px;
-  background-color: var(--attention);
+  background-color: var(--shadow);
 }
 
 .train .stack:nth-child(4) {
   top: -16px;
   width: 20px;
   height: 20px;
-  background-color: var(--foreground);
+  background-color: var(--text);
   transform: translate(10px, 0px) rotate(var(--rotate)) translate(-10px, 0px);
 }

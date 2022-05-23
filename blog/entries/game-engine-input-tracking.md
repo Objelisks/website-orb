@@ -11,7 +11,7 @@ that all currently looks like this:
 
 and now im working on input tracking!
 
-# input tracking
+## input tracking
 
 i gotta track the mouse so that you can make games, because games are Interactive  
 in order to click on things in the scene, we gotta take the mouse position and place it into the game scene  
@@ -50,7 +50,7 @@ and now we have a collision position that i can place an object at!
 clicking on objects in the scene is a little trickier, because we might have lots of objects and we don't necessarily want to raycast against every triangle on every object (that would be a lot of work)  
 so next up is to add some kind of [spatial partitioning](https://en.wikipedia.org/wiki/Space_partitioning) data structure and keep all the objects in there so that we can test against a small set of them
 
-# spatial partitioning
+## spatial partitioning
 
 in trains game i used an [rbush](https://github.com/mourner/rbush), mostly because it sounded funny to put a bunch of trains in a bush, but its also a fairly good choice because the trains were all running around in 2d and the rbush lets you quickly get all of the things that are immediately around you in 2d
 

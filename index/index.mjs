@@ -5,14 +5,14 @@ import Router from '@koa/router'
 import {head, nav} from '../common.mjs'
 
 const themeButton = html`
-<section>
+<section class="nav">
   <button id="theme-switcher">switch theme</button>
   <button id="frog">toggle train</button>
 </section>
 `
 
 const train = html`
-<aside class="train" data-rotate="rotate(120deg)"><div class="stack"></div><div class="stack"></div><div class="stack"></div><div class="stack"></div></aside>
+<div class="train" data-rotate="rotate(120deg)"><div class="stack"></div><div class="stack"></div><div class="stack"></div><div class="stack"></div></div>
 `
 
 const body = html`
@@ -24,13 +24,16 @@ const body = html`
     <script src="./index.js" type="module"></script>
   </head>
   <body>
-    <h1>welcome to objelisks space</h1>
+    <h1 class="header">welcome to objelisks space</h1>
     ${nav}
-    <p>hi this is my web site and my name is tim.</p>
-    <p>you'll find a bunch of projects and toys and some of my thoughts.</p>
+    <section>
+      <article>
+        <p>hi this is my web site and my name is tim.</p>
+        <p>you'll find here a bunch of projects and toys and some of my thoughts.</p>
+      </article>
+    </section>
     ${themeButton}
     ${train}
-    <div class=""></div>
   </body>
 </html>
 `
