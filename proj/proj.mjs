@@ -23,7 +23,7 @@ const projects = [
   },
   {
     images: [{
-      url: './wildflower/current_image.png',
+      url: '/proj/wildflower/current_image.png',
       alt: 'you come across some rolling hills with many flowers and it is peaceful'}],
     description: 'makes a pretty field of flowers',
     title: 'wildflower bot',
@@ -40,6 +40,7 @@ const body = html`
   <body>
     <h1>projects!</h1>
     ${nav}
+    <link href="proj/styles.css" type="text/css" rel="stylesheet">
     <section class="projects">
     ${projects.map(project => raw(html`
       <article class="project">
@@ -66,6 +67,7 @@ const app = new Koa()
 const router = new Router()
 
 router.get('/', proj)
+router.get('/strawberry.ico', (ctx) => sendfile(ctx, './index/favicon.ico'))
 router.get('/wildflower/current_image.png', (ctx) => sendfile(ctx, './hosted/wildflowerbot/out/1.png'))
 app.use(router.routes())
 app.use(serve('./proj'))

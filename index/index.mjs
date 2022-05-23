@@ -20,6 +20,7 @@ const body = html`
 <html>
   <head>
     ${head}
+    <link href="/styles.css" type="text/css" rel="stylesheet">
     <script src="./index.js" type="module"></script>
   </head>
   <body>

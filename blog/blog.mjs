@@ -18,6 +18,7 @@ const body = (entries) => html`
 <html>
   <head>
     ${head}
+    <link href="blog/styles.css" type="text/css" rel="stylesheet">
   </head>
   <body>
     <h1>blog zone</h1>

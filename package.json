@@ -5,7 +5,7 @@
   "main": "server.mjs",
   "scripts": {
     "start": "node server.mjs",
-    "deploy": "ssh objelisks.space 'cd /home/root/website & git pull & npm install'",
+    "deploy": "ssh root@objelisks.space ' cd /root/website-orb & git pull & npm install '",
     "setup": "node setup.mjs"
   },
   "author": "objelisks",
