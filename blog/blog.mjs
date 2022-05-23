@@ -19,6 +19,7 @@ const body = (entries) => html`
   <head>
     ${head}
     <link href="blog/styles.css" type="text/css" rel="stylesheet">
+    <script>//:3</script>
   </head>
   <body>
     <h1 class="header">blog zone</h1>

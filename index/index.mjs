@@ -22,6 +22,7 @@ const body = html`
     ${head}
     <link href="/styles.css" type="text/css" rel="stylesheet">
     <script src="./index.js" type="module"></script>
+    <script>//:3</script>
   </head>
   <body>
     <h1 class="header">welcome to objelisks space</h1>

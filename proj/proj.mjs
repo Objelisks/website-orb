@@ -37,6 +37,7 @@ const body = html`
   <head>
     ${head}
     <link href="proj/styles.css" type="text/css" rel="stylesheet">
+    <script>//:3</script>
   </head>
   <body>
     <h1 class="header">projects!</h1>
