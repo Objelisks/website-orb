@@ -2,10 +2,12 @@ import html from 'nanohtml'
 import Koa from 'koa'
 import serve from 'koa-static'
 import Router from '@koa/router'
+import {head, nav} from '../common.mjs'
 
 const themeButton = html`
 <section>
   <button id="theme-switcher">switch theme</button>
+  <button id="frog">toggle train</button>
 </section>
 `
 
@@ -17,14 +19,17 @@ const body = html`
 <!doctype html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/common/styles.css" type="text/css" rel="stylesheet">
+    ${head}
     <script src="./index.js" type="module"></script>
   </head>
   <body>
     <h1>welcome to objelisks space</h1>
+    ${nav}
+    <p>hi this is my web site and my name is tim.</p>
+    <p>you'll find a bunch of projects and toys and some of my thoughts.</p>
     ${themeButton}
     ${train}
+    <div class=""></div>
   </body>
 </html>
 `

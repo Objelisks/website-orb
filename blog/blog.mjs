@@ -4,7 +4,8 @@ import Koa from 'koa'
 import serve from 'koa-static'
 import Router from '@koa/router'
 import snarkdown from 'snarkdown'
-import fs from 'fs/promises'
+import fs from 'node:fs/promises'
+import {head, nav} from '../common.mjs'
 
 const renderEntry = (entry) => html`
 <article>
@@ -16,12 +17,11 @@ const body = (entries) => html`
 <!doctype html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/common/styles.css" type="text/css" rel="stylesheet">
-    <script src="./blog.js" type="module"></script>
+    ${head}
   </head>
   <body>
     <h1>blog zone</h1>
+    ${nav}
     ${raw(entries.map(renderEntry).join('\n'))}
   </body>
 </html>

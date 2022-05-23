@@ -1,19 +1,21 @@
 {
   "name": "website",
   "version": "1.0.0",
-  "description": "",
+  "description": "my website",
   "main": "server.mjs",
   "scripts": {
     "start": "node server.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "ssh objelisks.space 'cd /home/root/website & git pull & npm install'",
+    "setup": "node setup.mjs"
   },
-  "author": "",
+  "author": "objelisks",
   "license": "ISC",
   "dependencies": {
     "@koa/router": "^10.1.1",
     "choo": "^7.1.0",
     "koa": "^2.13.4",
     "koa-mount": "^4.0.0",
+    "koa-sendfile": "^3.0.0",
     "koa-static": "^5.0.0",
     "nanohtml": "^1.10.0",
     "snarkdown": "^2.0.0"
