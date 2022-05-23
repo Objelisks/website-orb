@@ -6,19 +6,25 @@ const themes = [
   'theme-blessing',
   'theme-woodblock'
 ]
-let activeTheme = 0
 const mouse = {x: 0, y: 0}
 let x = 200
 let y = 200
 let rotate = 0
 let trainOn = false
 
+let activeTheme = sessionStorage.getItem('theme') || 0
+const updateTheme = (targetTheme) => {
+  const classes = document.querySelector('body').classList
+  classes.remove(themes[activeTheme])
+  activeTheme = targetTheme
+  classes.add(themes[activeTheme])
+  sessionStorage.setItem('theme', activeTheme)
+}
+updateTheme(activeTheme)
+
 ready(() => {
   on('#theme-switcher', 'click', () => {
-    const classes = document.querySelector('body').classList
-    classes.remove(themes[activeTheme])
-    activeTheme = (activeTheme + 1) % themes.length
-    classes.add(themes[activeTheme])
+    updateTheme((activeTheme + 1) % themes.length)
   })
 
   on('#frog', 'click', () => {

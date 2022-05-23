@@ -67,7 +67,6 @@ const app = new Koa()
 const router = new Router()
 
 router.get('/', proj)
-router.get('/strawberry.ico', (ctx) => sendfile(ctx, './index/favicon.ico'))
 router.get('/wildflower/current_image.png', (ctx) => sendfile(ctx, './hosted/wildflowerbot/out/1.png'))
 app.use(router.routes())
 app.use(serve('./proj'))
