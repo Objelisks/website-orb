@@ -36,11 +36,11 @@ const body = html`
 <html>
   <head>
     ${head}
+    <link href="proj/styles.css" type="text/css" rel="stylesheet">
   </head>
   <body>
-    <h1>projects!</h1>
+    <h1 class="header">projects!</h1>
     ${nav}
-    <link href="proj/styles.css" type="text/css" rel="stylesheet">
     <section class="projects">
     ${projects.map(project => raw(html`
       <article class="project">
