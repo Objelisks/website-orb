@@ -7,17 +7,17 @@ const themes = [
   'theme-sky'
 ]
 
-let activeTheme = sessionStorage.getItem('theme') || 0
-const updateTheme = (targetTheme) => {
-  const classes = document.querySelector('body').classList
-  classes.remove(themes[activeTheme])
-  activeTheme = targetTheme
-  classes.add(themes[activeTheme])
-  sessionStorage.setItem('theme', activeTheme)
-}
-updateTheme(activeTheme)
-
 ready(() => {
+  let activeTheme = sessionStorage.getItem('theme') || 0
+  const updateTheme = (targetTheme) => {
+    const classes = document.querySelector('body').classList
+    classes.remove(themes[activeTheme])
+    activeTheme = targetTheme
+    classes.add(themes[activeTheme])
+    sessionStorage.setItem('theme', activeTheme)
+  }
+  updateTheme(activeTheme)
+  
   on('#theme-switcher', 'click', () => {
     updateTheme((activeTheme + 1) % themes.length)
   })
