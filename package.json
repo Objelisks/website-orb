@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@koa/router": "^10.1.1",
-    "choo": "^7.1.0",
     "koa": "^2.13.4",
     "koa-mount": "^4.0.0",
     "koa-sendfile": "^3.0.0",

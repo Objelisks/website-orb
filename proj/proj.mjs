@@ -5,31 +5,7 @@ import sendfile from 'koa-sendfile'
 import serve from 'koa-static'
 import Router from '@koa/router'
 import {head, nav} from '../common.mjs'
-
-const projects = [
-  {
-    images: [],
-    description: 'this website you are currently on',
-    title: 'objelisks.space',
-    year: '2022',
-    links: [{href: '/', text: 'here'}]
-  },
-  {
-    images: [],
-    description: 'a toy train simulator',
-    title: 'trains game',
-    year: '2021',
-    links: [{href: '/trains.game', text: 'trains game'}]
-  },
-  {
-    images: [{
-      url: '/proj/wildflower/current_image.png',
-      alt: 'you come across some rolling hills with many flowers and it is peaceful'}],
-    description: 'makes a pretty field of flowers',
-    title: 'wildflower bot',
-    year: '2016'
-  }
-]
+import projects from './list.mjs'
 
 const body = html`
 <!doctype html>

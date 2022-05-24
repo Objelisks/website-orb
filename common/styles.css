@@ -5,7 +5,6 @@
   --alt: #ff6973;
   --edge: #46425e;
   --shadow: #15788c;
-  --article-width: 45rem;
   --gap: 1em;
   --half-gap: calc(var(--gap) / 2.0);
   --border: 2px;
@@ -45,9 +44,8 @@
 }
 
 body {
-  display: grid;
-  grid: auto-flow / min-content;
-  gap: var(--gap);
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   background-color: var(--back);
   overflow-x: hidden;
@@ -62,7 +60,7 @@ body {
   text-align: center;
   color: var(--text);
   font-family: sans-serif;
-  font-size: var(--header-size);
+  font-size: 8vmin;
   text-transform: full-width;
   text-decoration: overline;
   font-weight: 900;
@@ -78,10 +76,16 @@ section {
   color: var(--text);
   padding: var(--gap);
   border: var(--border) solid var(--shadow);
+  margin: 0.5rem auto;
+  max-width: 90%;
 }
 
 .nav {
   grid: 1fr / auto-flow;
+}
+
+article {
+  overflow: hidden;
 }
 
 article > h1 {
@@ -108,9 +112,8 @@ a:hover {
 }
 
 img {
-  display: block;
-  margin: var(--gap);
-  max-width: var(--article-width);
+  object-fit: contain;
+  max-width: 100%;
 }
 
 pre {
@@ -122,6 +125,12 @@ pre {
 
 br {
   margin-bottom: 0.5rem;
+}
+
+ul {
+  display: grid;
+  grid: auto-flow / repeat(3, 1fr);
+  gap: var(--half-gap);
 }
 
 button {
