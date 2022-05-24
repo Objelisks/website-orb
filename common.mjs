@@ -11,5 +11,7 @@ export const nav = html`
   <a href="/">home</a>
   <a href="/blog">blog</a>
   <a href="/proj">projects</a>
+  <a href="/link">links</a>
+  <a href="/misc">miscellany</a>
 </section>
 `

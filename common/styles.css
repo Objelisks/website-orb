@@ -77,7 +77,7 @@ section {
   padding: var(--gap);
   border: var(--border) solid var(--shadow);
   margin: 0.5rem auto;
-  max-width: 90%;
+  max-width: min(90%, 40rem);
 }
 
 .nav {
