@@ -8,7 +8,7 @@ import {head, nav} from '../common.mjs'
 const columbos = [
   {ep:'S1E08', title: 'A Blueprint for Murder',
   notes: `first horse sighting
-  multiple execellent lines:
+  multiple excellent lines:
   you're very much like an arachnid
   we could've used you at the alamo you've got guts
   the omnipresent constable`},
