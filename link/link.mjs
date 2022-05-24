@@ -20,6 +20,7 @@ const body = html`
           <p><a href="https://quasi.legitbusiness.work/index.html">bcj</a></p>
           <p><a href="https://sowe.li/">casey</a></p>
           <p><a href="https://killpack.biz/">jordan</a></p>
+          <p><a href="https://everest-pipkin.com/">everest</a></p>
       </article>
     </section>
   </body>
