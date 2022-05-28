@@ -4,7 +4,7 @@ import Koa from 'koa'
 import serve from 'koa-static'
 import Router from '@koa/router'
 import {head, nav} from '../common.mjs'
-import columbos from './columbos.js'
+import columbos from './columbos.mjs'
 
 const columbo = html`
 <article id="columbo">
