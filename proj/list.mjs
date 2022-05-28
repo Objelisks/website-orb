@@ -16,7 +16,7 @@ const projects = [
     title: 'trains game',
     year: '2021',
     links: [
-      {href: '/trains.game', text: 'trains game'},
+      {href: 'https://objelisks.itch.io/trains-game', text: 'trains game'},
       {href: 'https://github.com/Objelisks/railyard', text: 'github'}
     ]
   },
