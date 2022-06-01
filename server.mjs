@@ -16,5 +16,7 @@ app.use(mount('/link', link))
 app.use(mount('/misc', misc))
 
 app.use(mount('/common', serve('./common')))
+app.use(mount('/regl-starter', serve('./hosted/regl-starter/dist')))
+app.use(mount('/regl-starter', serve('./hosted/regl-starter/public')))
 
 app.listen(3000)

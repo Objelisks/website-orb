@@ -1,5 +1,8 @@
 
 const columbos = [
+  {ep:'S2E06', title: 'A Stitch in Crime',
+  notes: `leonard nimoy!!
+  theres a nurse who talks very fast and is great`},
   {ep:'S1E08', title: 'A Blueprint for Murder',
   notes: `first horse sighting
   multiple excellent lines:
