@@ -6,10 +6,12 @@ import Router from '@koa/router'
 import snarkdown from 'snarkdown'
 import fs from 'node:fs/promises'
 import {head, nav} from '../common.mjs'
+import { blogPosts } from './entries.mjs'
 
 const renderEntry = (entry) => html`
 <article>
-${raw(snarkdown(entry))}
+<aside>${entry.date}</aside>
+${raw(snarkdown(entry.content))}
 </article>
 `
 
@@ -25,18 +27,19 @@ const body = (entries) => html`
     <h1 class="header">blog zone</h1>
     ${nav}
     <section>
-    ${raw(entries.map(renderEntry).join('\n'))}
+    ${raw(entries.map(entry => renderEntry(entry)).join('\n'))}
     </section>
   </body>
 </html>
 `
 
 const blog = async (ctx, next) => {
-  const files = await fs.readdir('./blog/entries')
-  const entries = []
-  for(const file of files) {
-    const markdown = await fs.readFile('./blog/entries/' + file, {encoding: 'utf8'})
-    entries.push(markdown)
+  const entries = blogPosts
+  for(const entry of entries) {
+    if(!entry.content) {
+      const markdown = await fs.readFile('./blog/entries/' + entry.url, {encoding: 'utf8'})
+      entry.content = markdown
+    }
   }
   ctx.response.body = body(entries).toString()
 }

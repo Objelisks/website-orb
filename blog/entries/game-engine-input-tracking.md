@@ -1,8 +1,7 @@
-hi hello! im going to talk about what im working on!
-
-today: it is my js game engine
-
 # js game engine
+
+hi hello! im going to talk about what im working on!  
+today: it is my js game engine  
 
 its mostly built around [regl](http://regl.party/)  
 i made a simple shader and wrote a thing to render [gltf](https://raw.githubusercontent.com/KhronosGroup/glTF/main/specification/2.0/figures/gltfOverview-2.0.0b.png) files  

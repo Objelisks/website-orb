@@ -17,5 +17,6 @@ if(!fs.existsSync('./hosted/regl-starter')) {
   spawnSync('git', ['clone', 'https://github.com/Objelisks/regl-starter.git', './hosted/regl-starter'])
   //install dependencies [canvas]
   spawnSync('npm', ['install'], {cwd: './hosted/regl-starter'})
+  spawnSync('npm', ['run', 'build'], {cwd: './hosted/regl-starter'})
   //setup cron
 }
