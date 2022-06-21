@@ -2,7 +2,9 @@ import fs from 'node:fs'
 
 const loadFiles = (folder) => {
   try {
-  return fs.readdirSync(`./pics/umurangi/${folder}`).map(filename => `/pics/umurangi/${folder}/${filename}`)
+  return fs.readdirSync(`./pics/umurangi/${folder}`)
+    .filter(filename => filename.endsWith('-small.png'))
+    .map(filename => `/pics/umurangi/${folder}/${filename}`)
   } catch {
     return []
   }
