@@ -7,6 +7,7 @@ import proj from './proj/proj.mjs'
 import link from './link/link.mjs'
 import misc from './misc/misc.mjs'
 import chat from './chat/chat.mjs'
+import pics from './pics/pics.mjs'
 
 const app = new Koa()
 
@@ -16,6 +17,7 @@ app.use(mount('/proj', proj))
 app.use(mount('/link', link))
 app.use(mount('/misc', misc))
 app.use(mount('/chat', chat))
+app.use(mount('/pics', pics))
 
 app.use(mount('/common', serve('./common')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/dist')))
