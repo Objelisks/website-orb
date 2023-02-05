@@ -4,6 +4,7 @@ export const head = html`
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/common/styles.css" type="text/css" rel="stylesheet">
 <script src="/common/common.js" type="module"></script>
+<link href="https://friend.camp/@objelisks" rel="me">
 `
 
 export const nav = html`
