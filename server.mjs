@@ -23,6 +23,6 @@ app.use(mount('/common', serve('./common')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/dist')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/public')))
 
-router.get('/resume', (ctx) => sendfile(ctx, './files/resume-tim-plummer-2023.html'))
+app.get('/resume', (ctx) => sendfile(ctx, './files/resume-tim-plummer-2023.html'))
 
 app.listen(3000)
