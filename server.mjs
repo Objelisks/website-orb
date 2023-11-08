@@ -8,6 +8,7 @@ import link from './link/link.mjs'
 import misc from './misc/misc.mjs'
 import chat from './chat/chat.mjs'
 import pics from './pics/pics.mjs'
+import sendfile from 'koa-sendfile'
 
 const app = new Koa()
 
@@ -23,6 +24,6 @@ app.use(mount('/common', serve('./common')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/dist')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/public')))
 
-app.get('/resume', (ctx) => sendfile(ctx, './files/resume-tim-plummer-2023.html'))
+app.use(mount('/resume', (ctx) => sendfile(ctx, './files/resume-tim-plummer-2023.html')))
 
 app.listen(3000)
