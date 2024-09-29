@@ -39,3 +39,20 @@
   background-color: var(--text);
   transform: translate(10px, 0px) rotate(var(--rotate)) translate(-10px, 0px);
 }
+
+.train1 {
+  z-index: 30;
+}
+.train2 {
+  z-index: 20;
+}
+.train3 {
+  z-index: 10;
+}
+
+.train2 .stack:nth-child(4) {
+  display: none;
+}
+.train3 .stack:nth-child(4) {
+  display: none;
+}

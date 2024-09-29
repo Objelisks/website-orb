@@ -12,7 +12,9 @@ const themeButton = html`
 `
 
 const train = html`
-<div class="train" data-rotate="rotate(120deg)"><div class="stack"></div><div class="stack"></div><div class="stack"></div><div class="stack"></div></div>
+<div class="train train1"><div class="stack"></div><div class="stack"></div><div class="stack"></div><div class="stack"></div></div>
+<div class="train train2"><div class="stack"></div><div class="stack"></div><div class="stack"></div><div class="stack"></div></div>
+<div class="train train3"><div class="stack"></div><div class="stack"></div><div class="stack"></div><div class="stack"></div></div>
 `
 
 const body = html`
