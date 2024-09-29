@@ -3,3 +3,6 @@ package-lock.json
 hosted
 *-small.png
 .vs
+.env
+out.log
+messages.txt

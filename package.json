@@ -2,11 +2,14 @@
   "name": "website",
   "version": "1.0.0",
   "description": "my website",
-  "main": "server.mjs",
   "scripts": {
-    "start": "node server.mjs",
+    "start": "node --env-file=.env server.mjs",
     "deploy": "ssh root@objelisks.space ' cd /root/website-orb & git pull & npm install '",
     "setup": "node setup.mjs"
+  },
+  "nodemonConfig": {
+    "ignore": ["**/hosted/**"],
+    "delay": 1000
   },
   "author": "objelisks",
   "license": "ISC",
