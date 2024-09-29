@@ -1,0 +1,11 @@
+{
+  "name": "website-orb",
+  "modules": [
+    {
+      "name": "railyard",
+      "src": "git@github.com:Objelisks/railyard.git",
+      "setup": "npm install",
+      "cmd": "npm run start"
+    }
+  ]
+}

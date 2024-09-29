@@ -1,7 +1,6 @@
 import html from 'nanohtml'
 import Koa from 'koa'
 import serve from 'koa-static'
-import bodyparser from 'koa-bodyparser'
 import Router from '@koa/router'
 import {head, nav} from '../common.mjs'
 import fs from 'node:fs/promises'
@@ -46,7 +45,6 @@ const app = new Koa()
 const router = new Router()
 
 router.get('/', chat)
-router.post('/', bodyparser())
 router.post('/', message)
 app.use(router.routes())
 app.use(serve('./chat'))
