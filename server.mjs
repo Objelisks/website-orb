@@ -11,6 +11,7 @@ import pics from './pics/pics.mjs'
 import webhookHandler from './webhooks.mjs'
 import sendfile from 'koa-sendfile'
 import bodyParser from 'koa-bodyparser'
+import util from 'util'
 
 const app = new Koa()
 
@@ -33,3 +34,4 @@ app.use(mount('/resume', (ctx) => sendfile(ctx, './files/tim-plummer-resume-2024
 app.use(mount('/webhooks', webhookHandler))
 
 app.listen(3000)
+console.log('server running at', util.inspect('http://localhost:3000', {colors: true}))

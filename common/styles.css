@@ -1,15 +1,15 @@
 :root {
-  --back: #ff6973;
-  --panel: #00b9be;
-  --text: #ffeecc;
-  --alt: #ffb0a3;
-  --edge: #46425e;
-  --shadow: #15788c;
+  --back: #5b7041;
+  --panel: #2d4f37;
+  --text: #f5d492;
+  --alt: #634e29;
+  --edge: #5d975a;
+  --shadow: #a9831b;
   --gap: 1em;
   --half-gap: calc(var(--gap) / 2.0);
   --border: 2px;
   --header-size: 3rem;
-  --text-size: 1rem;
+  --text-size: 1.5rem;
 }
 
 .theme-curious {
@@ -49,43 +49,38 @@ body {
   justify-content: center;
   background-color: var(--back);
   overflow-x: hidden;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: var(--text-size);
   font-weight: 500;
-  text-shadow: 0.1rem 0.1rem 1.5px var(--shadow);
 }
 
 .header {
   display: block;
   text-align: center;
   color: var(--text);
-  font-family: sans-serif;
   font-size: 8vmin;
-  text-transform: full-width;
-  text-decoration: overline;
   font-weight: 900;
-  text-shadow: 0.2rem 0.2rem 0px var(--shadow);
   margin: 2rem 0;
 }
 
-section {
-  display: grid;
-  grid: auto-flow / 1fr;
+section, nav {
+  display: flex;
+  width: max-content;
+  flex-wrap: wrap;
   gap: var(--gap);
   background-color: var(--panel);
   color: var(--text);
   padding: var(--gap);
-  border: var(--border) solid var(--shadow);
+  border: var(--border) solid var(--edge);
   margin: 0.5rem auto;
-  max-width: min(90%, 40rem);
-}
-
-.nav {
-  grid: 1fr / auto-flow;
+  max-width: min(90%, 50rem);
+  box-shadow: 2px 2px 6px var(--shadow);
 }
 
 article {
   overflow: hidden;
+  width: 100%;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
 }
 
 article > h1 {
@@ -136,8 +131,8 @@ ul {
 button {
   border: none;
   background-color: var(--alt);
-  color: var(--edge);
-  font-family: inherit;
+  color: var(--text);
+  font-family: reset;
   font-size: inherit;
   padding: var(--half-gap);
   box-shadow: 1px 1px 0px var(--shadow);

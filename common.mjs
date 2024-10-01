@@ -9,7 +9,7 @@ export const head = html`
 `
 
 export const nav = html`
-<section class="nav">
+<nav>
   <a href="/">home</a>
   <a href="/blog">blog</a>
   <a href="/proj">projects</a>
@@ -17,5 +17,5 @@ export const nav = html`
   <a href="/pics">pics</a>
   <a href="/misc">miscellany</a>
   <a href="/chat">chat</a>
-</section>
+</nav>
 `

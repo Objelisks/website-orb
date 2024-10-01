@@ -2,6 +2,7 @@ const ready = (callback) => document.addEventListener('DOMContentLoaded', callba
 const on = (selector, eventName, callback) => document.querySelectorAll(selector).forEach(el => el.addEventListener(eventName, callback))
 
 const themes = [
+  'default',
   'theme-curious',
   'theme-snail',
   'theme-sky'

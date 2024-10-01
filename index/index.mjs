@@ -5,7 +5,7 @@ import Router from '@koa/router'
 import {head, nav} from '../common.mjs'
 
 const themeButton = html`
-<section class="nav">
+<section class="button-container">
   <button id="theme-switcher">switch theme</button>
   <button id="frog">toggle train</button>
 </section>
