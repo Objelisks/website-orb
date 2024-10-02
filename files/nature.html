@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="preload" as="fetch" href="https://octothorp.es/?uri=https://weirdweboctober.website/">
+  <link rel="octo:octothorpes" href="weirdweboctober">
+  <link rel="octo:octothorpes" href="Nature">
+  <style>
+    * {
+      font-family: 'Courier New', Courier, monospace;
+      user-select: none;
+    }
+
+    button,
+    .tool-icon {
+      font-family: 'Courier New', Courier, monospace;
+      display: inline-block;
+      width: 4.5rem;
+      height: 4.5rem;
+      background-color: white;
+      border: 2px solid black;
+    }
+
+    button:hover {
+      box-shadow: 2px 2px black;
+    }
+
+    button:active {
+      box-shadow: 1px 1px black;
+    }
+  </style>
+</head>
+
+<body>
+  <pre class="tool-icon"></pre>
+  <button class="water-btn">water</button>
+  <button class="seeds-btn">seeds</button>
+  <pre style="position: fixed; top: -1rem; right: 0;">     ┌───┐ 
+    ┌┘   └┐
+  / │     │
+   /└┐   ┌┘
+ /   └───┘ 
+   / /  /  
+      /    
+       /   </pre>
+  <script>
+    const garden = document.querySelector('body')
+    const pickDirection = () => [Math.round(Math.random() * 2) - 1, Math.round(Math.random() * 2) - 1]
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
+    const tools = { seeds: 'seeds', water: 'water' }
+    let tool = tools.seeds
+    const plantingSpots = []
+
+    const addGuy = (guy) => {
+      if (guy.render) {
+        guy.render()
+      }
+    }
+
+    document.querySelector('.water-btn').onclick = () => {
+      document.querySelector('.tool-icon').textContent = `  ┌┐  
+◄┬└┘┬┐
+ │  ││
+ └──┘ `
+      tool = tools.water
+    }
+    document.querySelector('.seeds-btn').onclick = () => {
+      document.querySelector('.tool-icon').textContent = ` ┌──┐
+ │ .│
+ │. │
+ └──┘`
+      tool = tools.seeds
+    }
+
+    const lastDrop = [0, 0]
+    window.addEventListener('mousemove', (e) => {
+      if (Boolean(e.buttons & 1)) {
+        const x = Math.floor(e.clientX / 16)
+        const y = Math.floor((window.innerHeight - e.clientY) / 16)
+        if (lastDrop[0] === x && lastDrop[1] === y) {
+          return
+        }
+        switch (tool) {
+          case tools.water: {
+            addGuy(new waterdrop(x, y))
+            lastDrop[0] = x
+            lastDrop[1] = y
+            break;
+          }
+          case tools.seeds: {
+            addGuy(new seed(x, y))
+            lastDrop[0] = x
+            lastDrop[1] = y
+            break;
+          }
+        }
+      }
+    })
+
+    const stems = ['|', '|', '|', '|/']
+    const buds = ['o', 'O', '*', '@', '0', 'ʘ', '⚛', '♧', '⚙', '✩', '✺', '❄', '❈', '❖', '❤', '⁜', '֍']
+
+    const flower = class {
+      constructor(x, y) {
+        this.el = document.createElement('pre')
+        this.el.classList.add('flower')
+        this.el.style['position'] = 'absolute'
+        this.el.textContent = '88'
+        this.el.style['left'] = `${x}rem`
+        this.el.style['bottom'] = `${y}rem`
+        this.age = 0
+        this.water = 0
+        this.width = 1
+        this.stages = [',']
+        this.el.textContent = this.stages.toReversed().join('\n')
+        plantingSpots[x] = this
+        garden.appendChild(this.el)
+      }
+      render() {
+        this.age += 1
+        if (this.water >= 10) {
+          for (let i = 0; i < this.stages.length; i++) {
+            this.stages[i] = pick(stems)
+            this.width = Math.max(this.width, this.stages[i].length)
+          }
+          this.stages[this.stages.length] = pick(buds)
+          this.el.textContent = this.stages.toReversed().join('\n')
+          this.water = 0
+        }
+        setTimeout(this.render.bind(this), 1000)
+      }
+    }
+
+    const seed = class {
+      constructor(x, y) {
+        this.el = document.createElement('pre')
+        this.el.classList.add('seed')
+        this.el.style['position'] = 'absolute'
+        this.el.style['left'] = `${x}rem`
+        this.el.style['bottom'] = `${y}rem`
+        this.el.textContent = '.'
+        garden.appendChild(this.el)
+      }
+      render() {
+        const x = parseFloat(this.el.style['left'])
+        const y = parseFloat(this.el.style['bottom'])
+        this.el.style['bottom'] = `${y - 1}rem`
+        if (y < 0) {
+          this.el.remove()
+          if (!plantingSpots[x]) {
+            addGuy(new flower(x, 0))
+          }
+        } else {
+          setTimeout(this.render.bind(this), 100)
+        }
+      }
+    }
+
+    const waterdrop = class {
+      constructor(x, y) {
+        this.el = document.createElement('pre')
+        this.el.classList.add('waterdrop')
+        this.el.style['position'] = 'absolute'
+        this.el.style['left'] = `${x}rem`
+        this.el.style['bottom'] = `${y}rem`
+        this.el.textContent = '\''
+        garden.appendChild(this.el)
+      }
+      render() {
+        const x = parseFloat(this.el.style['left'])
+        const y = parseFloat(this.el.style['bottom'])
+        this.el.style['bottom'] = `${y - 1}rem`
+        if (y < 1) {
+          this.el.remove()
+          if (plantingSpots[x]) {
+            plantingSpots[x].water += 1
+          }
+        } else {
+          setTimeout(this.render.bind(this), 100)
+        }
+      }
+    }
+
+    const butterfly = class {
+      constructor(x, y) {
+        this.el = document.createElement('pre')
+        this.el.classList.add('butterfly')
+        this.el.style['position'] = 'absolute'
+        garden.appendChild(this.el)
+        this.el.textContent = '88'
+        this.el.style['left'] = `${x}rem`
+        this.el.style['bottom'] = `${y}rem`
+        this.age = 0
+      }
+      render() {
+        this.age += 1
+        this.el.textContent = this.age % 2 === 0 ? '||' : '88'
+        const move = pickDirection()
+        this.el.style['left'] = `${parseFloat(this.el.style['left']) + move[0]}rem`
+        this.el.style['bottom'] = `${parseFloat(this.el.style['bottom']) + move[1]}rem`
+        setTimeout(this.render.bind(this), 1000)
+      }
+    }
+
+    addGuy(new butterfly(5, 5))
+    addGuy(new butterfly(25, 6))
+
+  </script>
+</body>
+
+</html>

@@ -29,6 +29,8 @@ app.use(mount('/common', serve('./common')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/dist')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/public')))
 
+app.use(mount('/wwo/nature', (ctx) => sendfile(ctx, './files/nature.html')))
+
 app.use(mount('/resume', (ctx) => sendfile(ctx, './files/tim-plummer-resume-2024.pdf')))
 
 app.use(mount('/webhooks', webhookHandler))
