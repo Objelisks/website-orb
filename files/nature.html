@@ -3,10 +3,19 @@
 
 <head>
   <title>grow some flowers</title>
-  <link rel="preload" as="fetch" href="https://octothorp.es/?uri=https://weirdweboctober.website/">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preload" as="fetch" href="https://octothorp.es/?uri=https://objelisks.space/wwo/nature">
   <link rel="octo:octothorpes" href="weirdweboctober">
   <link rel="octo:octothorpes" href="Nature">
   <style>
+    html,
+    body {
+      overflow: hidden;
+      width: 100dvw;
+      height: 100dvh;
+      touch-action: none;
+    }
+
     * {
       font-family: 'Courier New', Courier, monospace;
       user-select: none;
@@ -16,8 +25,8 @@
     .tool-icon {
       font-family: 'Courier New', Courier, monospace;
       display: inline-block;
-      width: 4.5rem;
-      height: 4.5rem;
+      width: 5rem;
+      height: 5rem;
       background-color: white;
       border: 2px solid black;
     }
@@ -29,6 +38,12 @@
     button:active {
       box-shadow: 1px 1px black;
     }
+
+    .sun {
+      position: fixed;
+      top: -1rem;
+      right: 1rem;
+    }
   </style>
 </head>
 
@@ -36,7 +51,7 @@
   <pre class="tool-icon"></pre>
   <button class="water-btn">water</button>
   <button class="seeds-btn">seeds</button>
-  <pre style="position: fixed; top: -1rem; right: 0;">     ┌───┐ 
+  <pre class="sun">     ┌───┐ 
     ┌┘   └┐
   / │     │
    /└┐   ┌┘
@@ -74,7 +89,8 @@
     }
 
     const lastDrop = [0, 0]
-    window.addEventListener('mousemove', (e) => {
+    const moveHandler = (e) => {
+      console.log(e.buttons, e.pointerType)
       if (Boolean(e.buttons & 1)) {
         const x = Math.floor(e.clientX / 16)
         const y = Math.floor((window.innerHeight - e.clientY) / 16)
@@ -96,7 +112,8 @@
           }
         }
       }
-    })
+    }
+    window.addEventListener('pointermove', moveHandler)
 
     const stems = ['|', '|', '|', '|/']
     const buds = ['o', 'O', '*', '@', '0', 'ʘ', '⚛', '♧', '⚙', '✩', '✺', '❄', '❈', '❖', '❤', '⁜', '֍']
