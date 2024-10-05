@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>RISOPaint</title>
+  <style>
+    body {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      cursor: crosshair;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .layout {
+      display: grid;
+      grid-template: min-content auto / min-content auto;
+      gap: 2rem;
+    }
+
+    @media (width < 768px) {
+      .layout {
+        grid-template-columns: auto;
+      }
+    }
+
+    h1 {
+      font-size: 48pt;
+      grid-column: 1 / span 2;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (width < 768px) {
+      h1 {
+        grid-column: 1;
+      }
+    }
+
+    .layer-output {
+      display: grid;
+      border: 2px solid black;
+      width: fit-content;
+    }
+
+    .output {
+      grid-column: 1;
+      grid-row: 1;
+      width: 400px;
+      height: 600px;
+      mask-mode: alpha;
+    }
+
+    .canvases {
+      display: none;
+    }
+
+    .layers {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .layer {
+      display: flex;
+      flex-direction: row;
+      margin: 1px;
+      width: 20rem;
+      border: 2px solid white;
+      justify-content: space-between;
+    }
+
+    .layer.selected {
+      border: 2px dashed black;
+    }
+
+    button {
+      display: flex;
+      width: 2rem;
+      height: 2rem;
+      background-color: white;
+      border: 3px solid black;
+      justify-content: center;
+      align-items: center;
+      margin: 0.5rem;
+    }
+
+    .brush {
+      display: flex;
+    }
+
+    .color-selector {
+      background-color: #000
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .remove-color {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .add-color {
+      max-width: 4rem;
+    }
+
+    .popup {
+      position: absolute;
+      display: grid;
+      grid: auto / repeat(6, 1fr);
+      gap: 0.25rem;
+      margin: 0 auto;
+      margin-top: 6rem;
+      visibility: hidden;
+    }
+
+    .color-element,
+    .pattern-element {
+      width: 4rem;
+      height: 4rem;
+    }
+  </style>
+</head>
+
+
+<body>
+  <section class="layout">
+    <h1>RISOPaint</h1>
+    <div>
+      <button class="add-layer">+</button>
+      <div class="layers"></div>
+    </div>
+    <div class="layer-output">
+    </div>
+  </section>
+
+  <section class="modals">
+    <dialog id="color-popup" class="popup"></dialog>
+    <dialog id="pattern-popup" class="popup"></dialog>
+  </section>
+  <div class="canvases"></div>
+
+  <template id="layer">
+    <div id="layerX" class="layer">
+      <div class="brush">
+        <button class="color-selector"></button>
+      </div>
+      <div class="controls">
+        <button class="delete">❎</button>
+        <button class="move-up">⬆️</button>
+        <button class="move-down">⬇️</button>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const WIDTH = 400
+    const HEIGHT = 600
+    const COLORS = [
+      '#000000',
+      '#914e72',
+      '#0078bf',
+      '#00a95c',
+      '#3255a4',
+      '#f15060',
+      '#3D5588',
+      '#765ba7',
+      '#00838a',
+      '#bb8b41',
+      '#407060',
+      '#ff665e',
+      '#925f52',
+      '#ffe800',
+      '#d2515e',
+      '#ff6c2f',
+      '#ff48b0',
+      '#88898a'
+    ]
+    // const PATTERNS = [
+    //   `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" fill="%23808"><circle cx="120" cy="120" r="120"></circle><circle cx="120" cy="360" r="120"></circle><circle cx="360" cy="120" r="120"></circle><circle cx="360" cy="360" r="120"></circle></svg>')`
+    // ]
+
+    const colorPopup = document.querySelector('#color-popup')
+    COLORS.forEach(color => {
+      const colorElement = document.createElement('div')
+      colorElement.classList.add('color-element')
+      colorElement.style.backgroundColor = color
+      colorElement.addEventListener('click', () => {
+        colorPopup.returnValue = color;
+        colorPopup.close();
+        colorPopup.style.visibility = 'hidden'
+      })
+      colorPopup.appendChild(colorElement)
+    })
+
+    // const patternPopup = document.querySelector('#pattern-popup')
+    // PATTERNS.forEach(pattern => {
+    //   const patternElement = document.createElement('div')
+    //   patternElement.classList.add('pattern-element')
+    //   patternElement.style.filter = pattern
+    //   patternElement.addEventListener('click', () => {
+    //     patternPopup.returnValue = pattern;
+    //     patternPopup.close();
+    //     patternPopup.style.visibility = 'hidden'
+    //   })
+    //   patternPopup.appendChild(patternElement)
+    // })
+
+    const layers = []
+
+    const layerClick = (e) => {
+      layers.forEach(layer => layer.element.classList.remove('selected'))
+      e.target.classList.add('selected')
+    }
+    const selectColor = (id) => {
+      const layer = layers.find(layer => layer.id === id)
+      colorPopup.showModal()
+      colorPopup.style.visibility = 'visible'
+      colorPopup.addEventListener('close', (e) => {
+        layer.element.querySelector('.color-selector').style.backgroundColor = colorPopup.returnValue
+        layer.output.style.backgroundColor = colorPopup.returnValue
+      }, { once: true })
+    }
+    // const selectPattern = (id) => {
+    //   const layer = layers.find(layer => layer.id === id)
+    //   patternPopup.showModal()
+    //   patternPopup.style.visibility = 'visible'
+    //   patternPopup.addEventListener('close', (e) => {
+    //     layer.element.querySelector('.pattern-selector').style.backgroundColor = patternPopup.returnValue
+    //     layer.output.style.maskImage = patternPopup.returnValue
+    //   }, { once: true })
+    // }
+    const deleteLayer = (id) => {
+      const layerIndex = layers.findIndex(layer => layer.id === id)
+      const layer = layers[layerIndex]
+      layer.element.remove()
+      layer.canvas.remove()
+      layers.splice(layerIndex, 1)
+    }
+    const moveUpLayer = (id) => {
+      const layerIndex = layers.findIndex(layer => layer.id === id)
+      const layer = layers[layerIndex]
+      if (layerIndex >= 1) {
+        const temp = layers[layerIndex - 1]
+        layers[layerIndex - 1] = layers[layerIndex]
+        layers[layerIndex] = temp
+
+        layer.element.parentElement.insertBefore(layer.element, layer.element.previousElementSibling)
+        layers.forEach((layer, i) => {
+          layer.output.style.zIndex = i
+        })
+      }
+    }
+    const moveDownLayer = (id) => {
+      const layerIndex = layers.findIndex(layer => layer.id === id)
+      const layer = layers[layerIndex]
+      if (layerIndex <= layers.length - 2) {
+        const temp = layers[layerIndex + 1]
+        layers[layerIndex + 1] = layers[layerIndex]
+        layers[layerIndex] = temp
+
+        layer.element.parentElement.insertBefore(layer.element, layer.element.nextElementSibling.nextElementSibling)
+        layers.forEach((layer, i) => {
+          layer.output.style.zIndex = i
+        })
+      }
+    }
+    const getActiveLayer = () => {
+      return layers.find(layer => layer.element.classList.contains('selected'))
+    }
+
+    let layerIds = 1
+
+    const createLayer = () => {
+      const layerContainer = document.querySelector('.layers')
+      const canvasContainer = document.querySelector('.canvases')
+      const newLayerFragment = document.querySelector('#layer').content.cloneNode(true)
+      const layer = newLayerFragment.querySelector('#layerX')
+      const id = layerIds++
+      layer.id = `layer${id}`
+      const newCanvas = document.createElement('canvas')
+      newCanvas.id = `canvas-${id}`
+      newCanvas.width = WIDTH
+      newCanvas.height = HEIGHT
+      const output = document.createElement('div')
+      output.classList.add('output')
+      output.style.backgroundColor = '#000'
+      output.style.maskImage = `-moz-element(#canvas-${id})`
+      document.querySelector('.layer-output').appendChild(output)
+      layers.push({
+        id,
+        element: layer,
+        canvas: newCanvas,
+        output: output
+      })
+      output.style.zIndex = layers.length
+      layer.addEventListener('click', layerClick)
+      layer.querySelector('.color-selector').addEventListener('click', (e) => { e.stopPropagation(); selectColor(id) })
+      // layer.querySelector('.pattern-selector').addEventListener('click', (e) => { e.stopPropagation(); selectPattern(id) })
+      layer.querySelector('.delete').addEventListener('click', (e) => { e.stopPropagation(); deleteLayer(id) })
+      layer.querySelector('.move-up').addEventListener('click', (e) => { e.stopPropagation(); moveUpLayer(id) })
+      layer.querySelector('.move-down').addEventListener('click', (e) => { e.stopPropagation(); moveDownLayer(id) })
+      canvasContainer.appendChild(newCanvas)
+      layerContainer.appendChild(newLayerFragment)
+
+      layers.forEach(layer => layer.element.classList.remove('selected'))
+      layer.classList.add('selected')
+    }
+    document.querySelector('.add-layer').addEventListener('click', createLayer)
+    createLayer()
+
+
+    const brush = new OffscreenCanvas(50, 50)
+    const brushCtx = brush.getContext('2d')
+    const grad = brushCtx.createRadialGradient(25, 25, 0, 25, 25, 25)
+    grad.addColorStop(0, 'rgba(0, 0, 0, 0.5)')
+    grad.addColorStop(1, 'rgba(0, 0, 0, 0)')
+    brushCtx.fillStyle = grad
+    brushCtx.rect(0, 0, 50, 50)
+    brushCtx.fill()
+
+    const drawingSurface = document.querySelector('.layer-output')
+
+    let pressed = false
+    let penPressure = 1
+    let lastX = 0
+    let lastY = 0
+    drawingSurface.addEventListener('pointerdown', (e) => {
+      const x = e.offsetX
+      const y = e.offsetY
+      penPressure = 1
+      pressed = true
+      lastX = x
+      lastY = y
+    })
+    drawingSurface.addEventListener('pointerenter', (e) => {
+      if (!(e.buttons & 1)) {
+        pressed = false
+      }
+    })
+    drawingSurface.addEventListener('pointerup', (e) => {
+      pressed = false
+    })
+    drawingSurface.addEventListener('pointermove', (e) => {
+      if (pressed) {
+        const ctx = layers.find(layer => layer.element.classList.contains('selected')).canvas.getContext('2d')
+
+        const x = e.offsetX
+        const y = e.offsetY
+        if (penPressure < 50) {
+          penPressure += 10
+        }
+        ctx.drawImage(brush, (x - lastX) / 2 + lastX - penPressure / 2, (y - lastY) / 2 + lastY - penPressure / 2, penPressure, penPressure)
+
+        ctx.drawImage(brush, x - penPressure / 2, y - penPressure / 2, penPressure, penPressure)
+
+        lastX = x
+        lastY = y
+      }
+    })
+
+  </script>
+</body>
+
+</html>
