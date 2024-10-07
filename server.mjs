@@ -29,9 +29,10 @@ app.use(mount('/common', serve('./common')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/dist')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/public')))
 
-app.use(mount('/wwo/nature', (ctx) => sendfile(ctx, './files/nature.html')))
-app.use(mount('/wwo/birds', (ctx) => sendfile(ctx, './files/birds.html')))
-app.use(mount('/wwo/color', (ctx) => sendfile(ctx, './files/color.html')))
+app.use(mount('/wwo/nature', (ctx) => sendfile(ctx, './hosted/weirdweb/1-nature/index.html')))
+app.use(mount('/wwo/birds', (ctx) => sendfile(ctx, './hosted/weirdweb/4-lists/index.html')))
+app.use(mount('/wwo/color', (ctx) => sendfile(ctx, './hosted/weirdweb/3-color/index.html')))
+app.use(mount('/wwo/food', (ctx) => sendfile(ctx, './hosted/weirdweb/5-food/index.html')))
 
 app.use(mount('/resume', (ctx) => sendfile(ctx, './files/tim-plummer-resume-2024.pdf')))
 
