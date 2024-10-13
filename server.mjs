@@ -36,6 +36,8 @@ app.use(mount('/wwo/food', (ctx) => sendfile(ctx, './hosted/weirdweb/5-food/inde
 
 app.use(mount('/resume', (ctx) => sendfile(ctx, './files/tim-plummer-resume-2024.pdf')))
 
+app.use(mount('/games/chiabomber2/', serve('./hosted/chiabomber2/dist', '/games/chiabomber2/')))
+
 app.use(mount('/webhooks', webhookHandler))
 
 app.listen(3000)
