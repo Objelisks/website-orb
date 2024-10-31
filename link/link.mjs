@@ -17,7 +17,7 @@ const body = html`
     <section>
       <article>
           <p><a href="https://wayward.site/">maggie</a></p>
-          <p><a href="https://quasi.legitbusiness.work/index.html">bcj</a></p>
+          <p><a href="https://one-gross.online/">bcj</a></p>
           <p><a href="https://sowe.li/">casey</a></p>
           <p><a href="https://killpack.biz/">jordan</a></p>
           <p><a href="https://everest-pipkin.com/">everest</a></p>
