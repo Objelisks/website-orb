@@ -22,6 +22,14 @@ const body = html`
           <p><a href="https://killpack.biz/">jordan</a></p>
           <p><a href="https://everest-pipkin.com/">everest</a></p>
       </article>
+      <article>
+        <p>
+          <a href="https://objelisks.space"><img src="./files/button.png" width="88" height="31" alt="objelisks.space" /></a>
+          <textarea><a href="https://objelisks.space"><img src="https://objelisks.space/files/button.png" width="88" height="31" alt="objelisks.space" /></a></textarea>
+          <a href="https://objelisks.space"><img src="./files/banner.png" width="608" height="160" alt="objelisks.space" /></a>
+          <textarea><a href="https://objelisks.space"><img src="https://objelisks.space/files/banner.png" width="608" height="160" alt="objelisks.space" /></a></textarea>
+        </p>
+      </article>
     </section>
   </body>
 </html>

@@ -25,6 +25,7 @@ app.use(mount('/misc', misc))
 app.use(mount('/chat', chat))
 app.use(mount('/pics', pics))
 
+app.use(mount('/files', serve('./files')))
 app.use(mount('/common', serve('./common')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/dist')))
 app.use(mount('/regl-starter', serve('./hosted/regl-starter/public')))
