@@ -20,6 +20,7 @@ const body = html`
           <p>hi! if you wanna get in touch with me, you can do so at the following internet places:</p>
           <p>email: objelisks at gmail dot com</p>
           <p>mastodon: <a href="https://friend.camp/web/@objelisks">@objelisks@friend.camp</a></p>
+          <p>bluesky: <a href="https://bsky.app/profile/objelisks.space">@objelisks.space</a></p>
           <p>
             <form name="send-message" method="post">
               <input name="message" type="text" placeholder="this text box"></input>

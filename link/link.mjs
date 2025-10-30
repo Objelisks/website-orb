@@ -24,10 +24,10 @@ const body = html`
       </article>
       <article>
         <p>
-          <a href="https://objelisks.space"><img src="./files/button.png" width="88" height="31" alt="objelisks.space" /></a>
-          <textarea><a href="https://objelisks.space"><img src="https://objelisks.space/files/button.png" width="88" height="31" alt="objelisks.space" /></a></textarea>
-          <a href="https://objelisks.space"><img src="./files/banner.png" width="608" height="160" alt="objelisks.space" /></a>
-          <textarea><a href="https://objelisks.space"><img src="https://objelisks.space/files/banner.png" width="608" height="160" alt="objelisks.space" /></a></textarea>
+          <a href="https://objelisks.space"><img src="./files/objelisks-space-button.png" width="88" height="31" alt="objelisks.space" /></a>
+          <textarea><a href="https://objelisks.space"><img src="https://objelisks.space/files/objelisks-space-button.png" width="88" height="31" alt="objelisks.space" /></a></textarea>
+          <a href="https://objelisks.space"><img src="./files/objelisks-space-banner.png" width="608" height="160" alt="objelisks.space" /></a>
+          <textarea><a href="https://objelisks.space"><img src="https://objelisks.space/files/objelisks-space-banner.png" width="608" height="160" alt="objelisks.space" /></a></textarea>
         </p>
       </article>
     </section>

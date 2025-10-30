@@ -1,14 +1,13 @@
 ====documentation for future me
 
-server runs using nodemon to restart on deployments
-https://github.com/remy/nodemon
+server uses pm2 to keep alive and restart on updates
+https://pm2.keymetrics.io/docs/usage/quick-start/
 
-```bash
-cd website
-nohup nodemon > out.log &
 ```
-
-server is automatically restarted on js changes
+npm install pm2 -g
+pm2 start ecosystem.config.js
+pm2 list
+```
 
 
 modules running hosted on the server need these scripts (or similar, but using these names):
